@@ -1,0 +1,320 @@
+.dashboard {
+  min-height: 100vh;
+  padding: 28px;
+
+  background: #f8fafc;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 24px;
+
+  h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 6px 0 0;
+    color: #64748b;
+  }
+}
+
+.dashboard-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 14px;
+
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+
+  font-size: 13px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+
+  margin-bottom: 24px;
+}
+
+.dashboard-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+
+  gap: 20px;
+}
+
+
+@media (max-width: 900px) {
+
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-content {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .dashboard {
+    padding: 16px;
+  }
+
+  .dashboard-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .kpi-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+.filters {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.filters form {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+  }
+
+  input,
+  select {
+    height: 40px;
+
+    padding: 0 12px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    font: inherit;
+
+    &:focus {
+      outline: none;
+      border-color: #64748b;
+    }
+  }
+}
+
+.flight-list-section {
+  margin-top: 20px;
+
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+
+  overflow: hidden;
+}
+
+.section-header {
+  padding: 20px;
+
+  border-bottom: 1px solid #e2e8f0;
+
+  h2 {
+    margin: 0 0 4px;
+    font-size: 18px;
+  }
+
+  span {
+    font-size: 13px;
+    color: #64748b;
+  }
+}
+
+.flight-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1.5fr 1.2fr 100px;
+  align-items: center;
+
+  gap: 16px;
+
+  padding: 16px 20px;
+
+  border-bottom: 1px solid #f1f5f9;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.flight-number,
+.route {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.flight-number span,
+.route span {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.route strong {
+  font-size: 14px;
+}
+
+.aircraft {
+  font-size: 13px;
+  color: #475569;
+}
+
+.flight-status {
+  padding: 6px 10px;
+
+  border-radius: 20px;
+
+  text-align: center;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  background: #f1f5f9;
+}
+
+.flight-status.active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.flight-status.delayed {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.flight-status.arrived {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.flight-status.scheduled {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.empty-state {
+  padding: 40px;
+
+  text-align: center;
+  color: #64748b;
+}
+
+.flight-details {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+
+  h2 {
+    margin: 0 0 20px;
+    font-size: 20px;
+  }
+
+  p {
+    margin: 12px 0;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+.flight-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+
+  strong {
+    font-size: 24px;
+  }
+
+  span {
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: #e8f5e9;
+    font-size: 12px;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 900px) {
+  .dashboard-content {
+    grid-template-columns: 1fr;
+  }
+
+  .map-wrapper {
+    min-height: 450px;
+  }
+
+  .flight-details {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .filters {
+    width: 100%;
+  }
+
+  .filters form {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .filter-field {
+    width: 100%;
+  }
+
+  .filter-field input,
+  .filter-field select {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .kpi-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}

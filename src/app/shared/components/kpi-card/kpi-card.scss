@@ -1,0 +1,41 @@
+.kpi-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+
+  min-height: 100px;
+}
+
+.kpi-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+
+  border-radius: 10px;
+  background: #f1f5f9;
+
+  font-size: 22px;
+}
+
+.kpi-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kpi-title {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.kpi-value {
+  font-size: 26px;
+}

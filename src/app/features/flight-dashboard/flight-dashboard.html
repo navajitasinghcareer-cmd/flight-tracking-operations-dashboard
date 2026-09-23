@@ -1,0 +1,214 @@
+<div class="dashboard">
+
+  <header class="dashboard-header">
+    <div>
+      <h1>Flight Operations</h1>
+      <p>Real-time aviation monitoring dashboard</p>
+    </div>
+
+    <div class="dashboard-status">
+      <span class="status-dot"></span>
+      Live Operations
+    </div>
+  </header>
+
+
+  <section class="kpi-grid">
+
+    <app-kpi-card title="Total Flights" [value]="totalFlights" icon="✈" />
+
+    <app-kpi-card title="Active Flights" [value]="activeFlights" icon="●" />
+
+    <app-kpi-card title="Delayed Flights" [value]="delayedFlights" icon="!" />
+
+    <app-kpi-card title="Arrived Flights" [value]="arrivedFlights" icon="✓" />
+
+  </section>
+
+  <section class="filters">
+
+    <form [formGroup]="filterForm">
+
+      <div class="filter-field search-field">
+
+        <label for="search">
+          Search Callsign
+        </label>
+
+        <input id="search" type="text" formControlName="search" placeholder="e.g. AIC202" />
+
+      </div>
+
+
+      <div class="filter-field">
+
+        <label for="status">
+          Status
+        </label>
+
+        <select id="status" formControlName="status">
+          @for (status of statuses; track status) {
+          <option [value]="status">
+            {{ status }}
+          </option>
+          }
+        </select>
+
+      </div>
+
+
+      <div class="filter-field">
+
+        <label for="origin">
+          Origin
+        </label>
+
+        <select id="origin" formControlName="origin">
+          <option value="All">All Airports</option>
+
+          @for (airport of airports; track airport) {
+          <option [value]="airport">
+            {{ airport }}
+          </option>
+          }
+
+        </select>
+
+      </div>
+
+
+      <div class="filter-field">
+
+        <label for="destination">
+          Destination
+        </label>
+
+        <select id="destination" formControlName="destination">
+          <option value="All">All Airports</option>
+
+          @for (airport of airports; track airport) {
+          <option [value]="airport">
+            {{ airport }}
+          </option>
+          }
+
+        </select>
+
+      </div>
+
+    </form>
+
+  </section>
+
+  <section class="flight-list-section">
+
+    <div class="section-header">
+      <div>
+        <h2>Flights</h2>
+        <span>{{ filteredFlights.length }} flights</span>
+      </div>
+    </div>
+
+
+    <div class="flight-list">
+
+      @for (flight of filteredFlights; track flight.id) {
+
+      <div class="flight-row">
+
+        <div class="flight-number">
+          <strong>{{ flight.flightNumber }}</strong>
+          <span>{{ flight.callsign }}</span>
+        </div>
+
+
+        <div class="route">
+          <strong>
+            {{ flight.origin.code }}
+            →
+            {{ flight.destination.code }}
+          </strong>
+
+          <span>
+            {{ flight.origin.city }}
+            to
+            {{ flight.destination.city }}
+          </span>
+        </div>
+
+
+        <div class="aircraft">
+          {{ flight.aircraftType }}
+        </div>
+
+
+        <div class="flight-status" [class.active]="flight.status === 'Active'"
+          [class.delayed]="flight.status === 'Delayed'" [class.arrived]="flight.status === 'Arrived'"
+          [class.scheduled]="flight.status === 'Scheduled'">
+          {{ flight.status }}
+        </div>
+
+      </div>
+
+      } @empty {
+
+      <div class="empty-state">
+        No flights match your filters.
+      </div>
+
+      }
+
+    </div>
+
+  </section>
+
+  <section class="dashboard-content">
+
+    <div class="map-wrapper">
+      <app-flight-map (flightSelected)="onFlightSelected($event)"></app-flight-map>
+    </div>
+
+
+    <aside class="flight-details">
+      <h2>Flight Details</h2>
+
+      @if (selectedFlight) {
+      <div class="flight-header">
+        <strong>{{ selectedFlight.flightNumber }}</strong>
+        <span>{{ selectedFlight.status }}</span>
+      </div>
+
+      <p>
+        <strong>Callsign:</strong>
+        {{ selectedFlight.callsign }}
+      </p>
+
+      <p>
+        <strong>Aircraft:</strong>
+        {{ selectedFlight.aircraftType }}
+      </p>
+
+      <p>
+        <strong>Route:</strong>
+        {{ selectedFlight.origin.code }}
+        →
+        {{ selectedFlight.destination.code }}
+      </p>
+
+      <p>
+        <strong>Departure:</strong>
+        {{ selectedFlight.estimatedDeparture }}
+      </p>
+
+      <p>
+        <strong>Arrival:</strong>
+        {{ selectedFlight.estimatedArrival }}
+      </p>
+      } @else {
+      <p>Select a flight from the map to view operational details.</p>
+      }
+    </aside>
+
+  </section>
+
+</div>
